@@ -1,4 +1,5 @@
 const Keys = require("./keys");
+const Config = require("./config")
 const RedditApi = require("./RedditApi")
 const SpotifyApi = require("./SpotifyApi")
 
@@ -6,9 +7,9 @@ const redditApi = new RedditApi(Keys.REDDIT_APP_ID, Keys.REDDIT_SECRET_KEY, Keys
 
 SpotifyApi.newApi(Keys.SPOTIFY_APP_ID, Keys.SPOTIFY_SECRET_KEY, Keys.SPOTIFY_REFRESH_TOKEN)
   .then(spotifyApi => {
-    redditApi.getTracks("progmetal", 50)
+    redditApi.getTracks(Config.subreddit, 50)
       .then(tracks => spotifyApi.searchSongUris(tracks))
-      .then(uris => spotifyApi.replacePlaylist(Keys.SPOTIFY_PLAYLIST_ID, uris))
+      .then(uris => spotifyApi.replacePlaylist(Config.playlistId, uris))
   })
   .catch(err => {
     console.error(err)

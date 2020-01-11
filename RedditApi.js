@@ -22,15 +22,25 @@ class RedditApi {
    * @param {number} limit 
    */
   getTracks (subreddit, limit) {
+    console.log(`Getting top ${limit} top tracks from /r/${subreddit}`)
     return this.reddit.getSubreddit(subreddit).getHot({ limit })
-      .then(res => res
-        .filter(r => r.media)
-        .map(r => r.title.match(songRegex)))
-        .filter(r => !!r && r.length >= 3)
-        .map(r => ({ band: r[1], title: r[2] }))
+      .then(posts => {
+        console.log(`Found ${posts.length} posts from /r/${subreddit}`)
+        const tracks = this._getTrackPosts(posts)
+        console.log(`Found ${tracks.length} tracks`)
+        return tracks
+      })
       .catch(err => {
         console.error("Getting tracks from reddit failed", err)
       })
+  }
+
+  _getTrackPosts (posts) {
+    return posts
+      .filter(r => !!r.media)
+      .map(r => r.title.match(songRegex))
+      .filter(r => !!r && r.length >= 3)
+      .map(r => ({ band: r[1], title: r[2] }))
   }
 }
 

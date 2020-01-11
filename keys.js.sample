@@ -1,0 +1,10 @@
+module.exports = {
+  REDDIT_APP_ID: "",
+  REDDIT_SECRET_KEY: "",
+  REDDIT_USERNAME: "",
+  REDDIT_PASSWORD: "",
+
+  SPOTIFY_APP_ID: "",
+  SPOTIFY_SECRET_KEY: "",
+  SPOTIFY_REFRESH_TOKEN: "",
+}
