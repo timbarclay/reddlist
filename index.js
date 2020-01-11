@@ -15,7 +15,7 @@ const reddit = new snoowrap({
 const songRegex = /([\w\s]*)(?:\s-\s)([\w\s]*)/
 
 const spotifyApi = axios.create({
-  //baseURL: 'https://api.spotify.com/v1/',
+  baseURL: 'https://api.spotify.com/v1/',
   timeout: 1000,
   headers: {'Authorization': `Bearer ${Keys.SPOTIFY_ACCESS_TOKEN}`}
 });
@@ -26,22 +26,29 @@ reddit.getSubreddit("progmetal").getHot({ limit: 50 })
     .map(r => r.title.match(songRegex)))
     .filter(r => !!r && r.length >= 3)
     .map(r => ({ band: r[1], title: r[2] }))
-  .then(songs => {
-    const first = songs[0]
-    return spotifyApi.get(`https://api.spotify.com/v1/search?q=${first.band}+${first.title}&type=track&limit=1`)
-  })
-  .then(res => res.data)
-  .then(search => {
-    const track = search.tracks.items[0]
-    // handle not found
-    return track.uri
-  })
-  .then(trackUri => {
-    return spotifyApi.put(`https://api.spotify.com/v1/playlists/${Keys.SPOTIFY_PLAYLIST_ID}/tracks`, {
-      uris: [trackUri]
+  .then(searchSongUris)
+  .then(uris => {
+    return spotifyApi.put(`playlists/${Keys.SPOTIFY_PLAYLIST_ID}/tracks`, {
+      uris
     })
   })
-  .catch(err => {
-    var a = err
-  })
-  
+
+/**
+ * 
+ * @param {*} songs 
+ * @returns {Promise<string>}
+ */
+function searchSongUris (songs) {
+  const searches = songs.map(s => spotifyApi.get(`search?q=${s.band}+${s.title}&type=track&limit=1`))
+  return Promise.all(searches)
+    .then(responses => responses.map(r => r.data))
+    .then(results =>
+      results
+        .filter(r => r.tracks.total > 0)
+        .map(r => r.tracks.items[0])
+        .map(t => t.uri)
+    )
+    .catch(err => {
+      var a = err
+    })
+}
