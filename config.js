@@ -1,4 +1,4 @@
 module.exports = {
-  playlistId: "4b5XLd1E7CoDSpIBxidebe",
+  playlist: "4b5XLd1E7CoDSpIBxidebe",
   subreddit: "progmetal"
 }

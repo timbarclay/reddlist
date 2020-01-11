@@ -20,11 +20,11 @@ Make sure you have node and npm
 
 Make a copy `keys.js.sample` at `keys.js` and then fill in the empty strings with your credentials for the reddit and Spotify APIs. How to do that is described below.
 
-Update `config.js` with the ID of an existing playlist that your account has permission to edit (make sure the Spotify API scope matches the public/private setting of the playlist).
+The app can be configured either by setting the values in `config.js` or by passing in command line options. You'll need the ID of an existing playlist that your account has permission to edit (make sure the Spotify API scope matches the public/private setting of the playlist) and a subreddit that is likely to have some song among its top posts.
 
 Run the app
 
-    node index.js
+    node index.js -r progmetal -p <a playlist ID>
 
 ### Reddit API
 
@@ -37,5 +37,4 @@ Follow [https://blog.getpostman.com/2016/11/09/generate-spotify-playlists-using-
 ## To do
 
 * Make song regex configurable to suit subs that have different post title conventions
-* Pass in command line arguments
 * Deploy to run automatically on a time interval (lambda?)
