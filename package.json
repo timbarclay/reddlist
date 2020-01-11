@@ -4,6 +4,7 @@
   "description": "A CLI app for creating a Apple Music or Spotify playlist based on the top posts in a subreddit",
   "main": "index.js",
   "scripts": {
+    "run": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/timbarclay/reddlist/issues"
   },
-  "homepage": "https://github.com/timbarclay/reddlist#readme"
+  "homepage": "https://github.com/timbarclay/reddlist#readme",
+  "dependencies": {
+    "snoowrap": "^1.20.1"
+  }
 }
