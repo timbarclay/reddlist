@@ -1,7 +1,7 @@
 {
   "name": "reddlist",
   "version": "1.0.0",
-  "description": "A CLI app for creating a Apple Music or Spotify playlist based on the top posts in a subreddit",
+  "description": "A CLI app for creating a Spotify playlist based on the top posts in a subreddit",
   "main": "index.js",
   "scripts": {
     "run": "node index.js",
