@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/timbarclay/reddlist#readme",
   "dependencies": {
+    "axios": "^0.19.1",
     "snoowrap": "^1.20.1"
   }
 }
