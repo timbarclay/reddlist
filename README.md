@@ -8,7 +8,7 @@ A CLI app for populating a Spotify playlist with tracks from the hot posts of a 
 
 Running the app will query reddit to find the n top posts from a given sub. From those it will attempt to find any song posts i.e. a post with a youtube link body and with a title that matches the pattern:
 
-    band name - song title
+    band name - song title 
 
 It will then query Spotify for each of those tracks and replace the contents of a nominated Spotify playlist with those tracks.
 
