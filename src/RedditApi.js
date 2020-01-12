@@ -1,5 +1,5 @@
 const snoowrap = require("snoowrap");
-const packagejson = require('./package.json');
+const packagejson = require('../package.json');
 
 const songRegex = /([\w\s]*)(?:\s-\s)([\w\s]*)/
 

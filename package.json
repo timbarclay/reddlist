@@ -4,8 +4,9 @@
   "description": "A CLI app for creating a Spotify playlist based on the top posts in a subreddit",
   "main": "index.js",
   "scripts": {
-    "run": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "serverless deploy"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
     "command-line-args": "^5.1.1",
     "querystring": "^0.2.0",
     "snoowrap": "^1.20.1"
+  },
+  "devDependencies": {
+    "serverless": "^1.60.5"
   }
 }

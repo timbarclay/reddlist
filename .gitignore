@@ -1,4 +1,8 @@
+# package directories
 node_modules
+jspm_packages
+keys.js
 .vscode
 
-keys.js
+# Serverless directories
+.serverless
