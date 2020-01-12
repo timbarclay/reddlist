@@ -1,3 +1,5 @@
+[Donate](https://paypal.me/timrbarclay?locale.x=en_GB)
+
 # Reddlist
 
 A CLI app for populating a Spotify playlist with tracks from the hot posts of a subreddit.
@@ -34,7 +36,12 @@ Follow [https://github.com/reddit-archive/reddit/wiki/OAuth2](these instructions
 
 Follow [https://blog.getpostman.com/2016/11/09/generate-spotify-playlists-using-a-postman-collection/](these instructions) to create a client ID and secret and then use those to generate an access token and refresh token using Postman. You'll need the `playlist-modify-public` scope if you want to target a public playlist or the `playlist-modify-private` to target a private one.
 
+## Deployment
+
+The repo contains a serverless config to deploy the app as an AWS lambda so it can be triggered on a schedule to update playlists regularly. You will need AWS credentials either saved in `~/.aws/credentials` or manually configured in serverless.
+
+    npm run deploy
+
 ## To do
 
 * Make song regex configurable to suit subs that have different post title conventions
-* Deploy to run automatically on a time interval (lambda?)
