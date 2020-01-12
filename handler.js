@@ -1,16 +1,24 @@
 'use strict'
 
-module.exports.helloWorld = (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-    },
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
+const createPlaylist = require("./src/createPlaylist")
 
-  callback(null, response);
+module.exports.createPlaylist = (event, context, callback) => {
+  const subreddit = event.subreddit
+  const playlist = event.playlist
+  const limit = event.limit || 50
+
+  if (!subreddit) {
+    callback("No subreddit provided", { success: false })
+  }
+  if (!playlist) {
+    callback("No playlist provided", { success: false })
+  }
+
+  createPlaylist(subreddit, playlist, limit)
+    .then(snapshot => {
+      callback(null, { success: true, snapshot })
+    })
+    .catch(error => {
+      callback(error, { success: false })
+    })
 };

@@ -1,9 +1,6 @@
 # Welcome to serverless. Read the docs
 # https://serverless.com/framework/docs/
 
-# Serverless.yml is the configuration the CLI
-# uses to deploy your code to your provider of choice
-
 # The `service` block is the name of the service
 service: reddlist
 
@@ -14,11 +11,18 @@ provider:
 
 # The `functions` block defines what code to deploy
 functions:
-  helloWorld:
-    handler: handler.helloWorld
-    # The `events` block defines how to trigger the handler.helloWorld code
+  createPlaylist:
+    handler: handler.createPlaylist
     events:
-      - http:
-          path: hello-world
-          method: get
-          cors: true
+      - schedule:
+          rate: cron(0 1 ? * MON *)
+          enabled: true
+          input:
+            subreddit: progmetal
+            playlist: 4b5XLd1E7CoDSpIBxidebe
+      - schedule:
+          rate: cron(5 1 ? * MON *)
+          enabled: true
+          input:
+            subreddit: metal
+            playlist: 6pSFm28Oz3hQ7HXolXJHCj
