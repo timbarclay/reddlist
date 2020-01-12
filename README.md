@@ -30,11 +30,11 @@ Run the app
 
 ### Reddit API
 
-Follow [https://github.com/reddit-archive/reddit/wiki/OAuth2](these instructions) to generate client ID and secret.
+Follow [these instructions](https://github.com/reddit-archive/reddit/wiki/OAuth2) to generate client ID and secret.
 
 ### Spotify API
 
-Follow [https://blog.getpostman.com/2016/11/09/generate-spotify-playlists-using-a-postman-collection/](these instructions) to create a client ID and secret and then use those to generate an access token and refresh token using Postman. You'll need the `playlist-modify-public` scope if you want to target a public playlist or the `playlist-modify-private` to target a private one.
+Follow [these instructions](https://blog.getpostman.com/2016/11/09/generate-spotify-playlists-using-a-postman-collection/) to create a client ID and secret and then use those to generate an access token and refresh token using Postman. You'll need the `playlist-modify-public` scope if you want to target a public playlist or the `playlist-modify-private` to target a private one.
 
 ## Deployment
 
