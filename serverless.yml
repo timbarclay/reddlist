@@ -21,10 +21,10 @@ functions:
           enabled: true
           input:
             subreddit: progmetal
-            playlist: 4b5XLd1E7CoDSpIBxidebe
+            playlist: 42xBtEmKk8GTsbjfX7XDFi
       - schedule:
           rate: cron(5 1 * * ? *)
           enabled: true
           input:
             subreddit: metal
-            playlist: 6pSFm28Oz3hQ7HXolXJHCj
+            playlist: 5u51TosBghGtxdTYWuHUPv
