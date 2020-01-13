@@ -17,13 +17,13 @@ functions:
     handler: handler.createPlaylist
     events:
       - schedule:
-          rate: cron(0 1 ? * MON *)
+          rate: cron(0 1 * * ? *)
           enabled: true
           input:
             subreddit: progmetal
             playlist: 4b5XLd1E7CoDSpIBxidebe
       - schedule:
-          rate: cron(5 1 ? * MON *)
+          rate: cron(5 1 * * ? *)
           enabled: true
           input:
             subreddit: metal
