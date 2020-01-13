@@ -14,7 +14,7 @@ module.exports.createPlaylist = (event, context, callback) => {
     callback("No playlist provided", { success: false })
   }
 
-  createPlaylist(subreddit, playlist, limit)
+  createPlaylist(subreddit, playlist, limit, process.env)
     .then(snapshot => {
       callback(null, { success: true, snapshot })
     })
