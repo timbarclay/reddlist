@@ -1,7 +1,8 @@
 const snoowrap = require("snoowrap");
 const packagejson = require('../package.json');
 
-const songRegex = /([\w\s]*)(?:\s-\s)([\w\s]*)/
+const songRegex = /(.*)(?:\s-\s)(.*)/
+const nonWordRegex = /[^\w\s]/
 
 class RedditApi {
   constructor (appId, secretKey, username, password) {
@@ -37,10 +38,21 @@ class RedditApi {
 
   _getTrackPosts (posts) {
     return posts
-      .filter(r => !!r.media)
-      .map(r => r.title.match(songRegex))
+      .filter(r => !!r.media && r.media.type.toLowerCase().includes("youtube"))
+      .map(r => this._parseTitle(r.title))
       .filter(r => !!r && r.length >= 3)
-      .map(r => ({ band: r[1], title: r[2] }))
+      .map(r => ({ band: r[1].replace(nonWordRegex, ""), title: r[2].replace(nonWordRegex, "") }))
+  }
+
+  /**
+   * Apply the songRegex to the reddit post title. Also strip out stuff in brackets because they often denote live versions or other info that
+   * will confuse Spotify
+   * @param {String} title 
+   */
+  _parseTitle (title) {
+    return title
+      .replace(/\([^\)]*\)/, "") // remove bits in parentheses
+      .match(songRegex)
   }
 }
 

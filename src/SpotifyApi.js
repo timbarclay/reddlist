@@ -17,13 +17,19 @@ class SpotifyApi {
   */
   searchSongUris (songs) {
     console.log(`Searching Spotify for ${songs.length} tracks`)
-    const searches = songs.map(s => this.spotifyApi.get(`search?q=${s.band}+${s.title}&type=track&limit=1`))
+    const searches = songs.map(s => {
+      const q = `${s.band} ${s.title}`
+      return this.spotifyApi.get(`search?q=${q}&type=track&limit=1`)
+    })
     return Promise.all(searches)
       .then(responses => responses.map(r => r.data))
       .then(results => {
         const uris = results
-          .filter(r => r.tracks.total > 0)
-          .map(r => r.tracks.items[0])
+          .map((result, i) => ({ result, search: songs[i] }))
+          .filter(r => r.result.tracks.total > 0)
+          .map(r => {
+            return r.result.tracks.items[0]
+          })
           .map(t => t.uri)
         console.log(`Found ${uris.length} songs on Spotify`)
         return uris
