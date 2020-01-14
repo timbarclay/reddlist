@@ -41,7 +41,7 @@ class RedditApi {
       .filter(r => !!r.media && r.media.type.toLowerCase().includes("youtube"))
       .map(r => this._parseTitle(r.title))
       .filter(r => !!r && r.length >= 3)
-      .map(r => ({ band: r[1].replace(nonWordRegex, ""), title: r[2].replace(nonWordRegex, "") }))
+      .map(r => ({ band: r[1].replace(nonWordRegex, "").trim(), title: r[2].replace(nonWordRegex, "").trim() }))
   }
 
   /**

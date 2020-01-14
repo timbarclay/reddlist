@@ -8,7 +8,7 @@ function createPlaylist (subreddit, playlist, limit, keys) {
     .then(spotifyApi => {
       redditApi.getTracks(subreddit, limit)
         .then(tracks => spotifyApi.searchSongUris(tracks))
-        .then(uris => spotifyApi.replacePlaylist(playlist, uris))
+        //.then(uris => spotifyApi.replacePlaylist(playlist, uris))
     })
     .catch(err => {
       console.error(err)
