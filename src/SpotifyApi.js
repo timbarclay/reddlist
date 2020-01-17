@@ -3,6 +3,7 @@ const qs = require("querystring")
 const FuzzySet = require("fuzzyset.js")
 
 const FUZZY_CUTOFF = 0.6
+const nonWordRegex = /[^\w\s]/g
 
 class SpotifyApi {
   constructor (accessToken) {
@@ -21,7 +22,7 @@ class SpotifyApi {
   searchSongUris (songs) {
     console.log(`Searching Spotify for ${songs.length} tracks`)
     const searches = songs.map(s => {
-      const q = `${s.band} ${s.title}`
+      const q = `${s.band} ${s.title}`.replace(nonWordRegex, "")
       return this.spotifyApi.get(`search?q=${q}&type=track&limit=10`)
     })
     return Promise.all(searches)
@@ -89,7 +90,7 @@ class SpotifyApi {
    * @param {String} b 
    */
   _matchesTitle(a, b) {
-    const prepareStr = str => str.trim().toLowerCase().replace(/\W/, "")
+    const prepareStr = str => str.trim().toLowerCase().replace(/\W/g, "")
 
     const aLower = prepareStr(a)
     const bLower = prepareStr(b)

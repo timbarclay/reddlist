@@ -2,7 +2,6 @@ const snoowrap = require("snoowrap");
 const packagejson = require('../package.json');
 
 const songRegex = /(.*)(?:\s-\s)(.*)/
-const nonWordRegex = /[^\w\s]/
 
 class RedditApi {
   constructor (appId, secretKey, username, password) {
@@ -27,7 +26,7 @@ class RedditApi {
     return this.reddit.getSubreddit(subreddit).getHot({ limit })
       .then(posts => {
         console.log(`Found ${posts.length} posts from /r/${subreddit}`)
-        const tracks = this._getTrackPosts(posts)
+        const tracks = RedditApi._getTrackPosts(posts)
         console.log(`Found ${tracks.length} tracks`)
         return tracks
       })
@@ -36,12 +35,12 @@ class RedditApi {
       })
   }
 
-  _getTrackPosts (posts) {
+  static _getTrackPosts (posts) {
     return posts
-      .filter(r => !!r.media && r.media.type.toLowerCase().includes("youtube"))
+      .filter(r => r.media)
       .map(r => this._parseTitle(r.title))
       .filter(r => !!r && r.length >= 3)
-      .map(r => ({ band: r[1].replace(nonWordRegex, "").trim(), title: r[2].replace(nonWordRegex, "").trim() }))
+      .map(r => ({ band: r[1].trim(), title: r[2].trim() }))
   }
 
   /**
@@ -49,9 +48,10 @@ class RedditApi {
    * will confuse Spotify
    * @param {String} title 
    */
-  _parseTitle (title) {
+  static _parseTitle (title) {
     return title
-      .replace(/\([^\)]*\)/, "") // remove bits in parentheses
+      .replace(/\([^\)]*\)/g, "") // remove bits in parentheses
+      .replace(/\[[^\]]*\]/g, "") // remove bits in square brackets
       .match(songRegex)
   }
 }
