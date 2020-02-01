@@ -28,3 +28,9 @@ functions:
           input:
             subreddit: metal
             playlist: 5u51TosBghGtxdTYWuHUPv
+      - schedule:
+          rate: cron(10 1 * * ? *)
+          enabled: true
+          input:
+            subreddit: progladies
+            playlist: 5kA1P4fYMvvPpeKbhhapyK
