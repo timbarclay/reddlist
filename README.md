@@ -41,3 +41,5 @@ Follow [these instructions](https://blog.getpostman.com/2016/11/09/generate-spot
 The repo contains a serverless config to deploy the app as an AWS lambda so it can be triggered on a schedule to update playlists regularly. You will need AWS credentials either saved in `~/.aws/credentials` or manually configured in serverless.
 
     npm run deploy
+
+The secrets from the keys.js file must be set as environment variables for the lambda. This can be done directly in the AWS console.
