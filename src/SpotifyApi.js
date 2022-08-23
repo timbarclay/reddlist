@@ -1,5 +1,4 @@
 const axios = require("axios");
-const qs = require("querystring")
 const FuzzySet = require("fuzzyset.js")
 
 const FUZZY_CUTOFF = 0.6
@@ -124,12 +123,12 @@ class SpotifyApi {
   static newApi (clientId, clientSecret, refreshToken) {
     const basicAuth = `${clientId}:${clientSecret}`
     const basicAuth64 = Buffer.from(basicAuth).toString('base64');
-    const params = {
-      grant_type: "refresh_token",
-      refresh_token: refreshToken
-    }
+    const params = new URLSearchParams()
+    params.set("grant_type", "refresh_token")
+    params.set("refresh_token", refreshToken)
+    
     console.log("Refreshing Spotify access token")
-    return axios.post("https://accounts.spotify.com/api/token", qs.stringify(params), {
+    return axios.post("https://accounts.spotify.com/api/token", params.toString(), {
       headers: {
         Authorization: `Basic ${basicAuth64}`,
         "Content-Type": "application/x-www-form-urlencoded"
