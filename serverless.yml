@@ -9,7 +9,7 @@ service: reddlist
 # The `provider` block defines where your service will be deployed
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs18.x
 
 # The `functions` block defines what code to deploy
 functions:
