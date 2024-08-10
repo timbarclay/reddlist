@@ -20,10 +20,12 @@ class SpotifyApi {
   */
   searchSongUris (songs) {
     console.log(`Searching Spotify for ${songs.length} tracks`)
-    const searches = songs.map(s => {
-      const q = `${s.band} ${s.title}`.replace(nonWordRegex, "")
-      return this.spotifyApi.get(`search?q=${q}&type=track&limit=10`)
-    })
+    const searches = songs
+      .filter(s => !!s.band && !!s.title)
+      .map(s => {
+        const q = `${s.band} ${s.title}`.replace(nonWordRegex, "")
+        return this.spotifyApi.get(`search?q=${q}&type=track&limit=10`)
+      })
     return Promise.all(searches)
       .then(responses => responses.map(r => r.data))
       .then(results => {

@@ -1,4 +1,4 @@
 module.exports = {
-  playlist: "42xBtEmKk8GTsbjfX7XDFi",
-  subreddit: "progmetal"
+  playlist: "5kA1P4fYMvvPpeKbhhapyK",
+  subreddit: "progLadies"
 }
